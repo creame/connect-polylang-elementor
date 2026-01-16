@@ -1,0 +1,488 @@
+/* ============================================
+   DASHBOARD WRAPPER - CPEL Style
+   ============================================ */
+
+.cpel-dashboard-wrap {
+    margin: 0 0 0 -20px !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* Header Section */
+.cpel-dashboard-header {
+    background: #fff;
+    border-bottom: 1px solid #dcdcde;
+    padding: 12px 30px;
+}
+
+.cpel-header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cpel-header-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.cpel-header-logo img {
+    max-height: 40px;
+    width: auto;
+    display: block;
+}
+
+.cpel-header-title {
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    color: #000;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif !important;
+    letter-spacing: -0.5px !important;
+    line-height: 1.2 !important;
+}
+
+.cpel-header-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.cpel-header-actions .button {
+    height: auto;
+    line-height: 1.5;
+    padding: 8px 16px;
+    font-size: 12px;
+}
+
+/* Nav Tab CSS - CPEL Style */
+.cpel-dashboard-wrap h2.nav-tab-wrapper,
+.cpel-dashboard-wrap .tab-content {
+    padding: 20px 30px 0 30px !important;
+    background-color: #fff !important;
+}
+
+.cpel-dashboard-wrap .tab-content {
+    margin: 25px auto;
+}
+
+.cpel-dashboard-wrap h2.nav-tab-wrapper .nav-tab {
+    padding: 10px 15px;
+}
+
+.cpel-dashboard-wrap h2.nav-tab-wrapper .nav-tab-active {
+    background-color: #fff;
+    border-bottom-color: #fff;
+}
+
+/* Tab Content Wrapper */
+.cpel-tab-content-wrapper {
+    background: #fff;
+    padding: 0 30px 30px;
+    min-height: 500px;
+}
+
+/* Toggle Switch Wrapper */
+.cpel-toggle-all-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    flex-wrap: wrap;
+    font-size: 0.9rem;
+}
+
+.cpel-toggle-label {
+    margin: 0;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+/* Plugin Cards for "More Addons" section */
+.cpel-form-element-card {
+    width: calc(33.333% - 15px);
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    background: #fff;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.cpel-form-element-card:hover {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.12);
+    border-color: #3f415e;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .cpel-form-element-card {
+        width: calc(50% - 15px);
+    }
+}
+
+@media (max-width: 782px) {
+    .cpel-dashboard-header {
+        padding: 15px 20px;
+    }
+    
+    .cpel-header-content {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+    
+    .cpel-header-actions {
+        width: 100%;
+    }
+    
+    .cpel-header-actions .button {
+        flex: 1;
+        text-align: center;
+    }
+    
+    .cpel-dashboard-wrap h2.nav-tab-wrapper,
+    .cpel-dashboard-wrap .tab-content {
+        padding: 0 20px;
+    }
+    
+    .cpel-tab-content-wrapper {
+        padding: 0 20px 20px;
+    }
+    
+    .cpel-form-element-card {
+        width: 100%;
+    }
+}
+
+/* AutoPoly Promo Box */
+.cpel-promo-box {
+    display: flex;
+    gap: 2px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 8px;
+    border: 1px solid #c3c4c7;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+.cpel-promo-text-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+    flex: 1;
+    min-width: 0;
+}
+
+div[data-notice_id="cpel-autopoly-promotion"] div.e-notice__content{
+    padding: 10px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+}
+div[data-notice_id="cpel-autopoly-promotion"] div.e-notice__actions{
+    margin-block-start: 0px !important;
+}
+
+.cpel-promo-text-section strong {
+    font-size: 1.1rem !important;
+    font-weight: 600;
+    color: var(--cpel-text-primary);
+    margin-bottom: 2px;
+    line-height: 1.4;
+}
+
+.cpel-promo-subtitle {
+    font-size: 1rem;
+    color: #838389;
+    margin-bottom: 5px;
+    display: block;
+    line-height: 1.4;
+}
+
+.cpel-promo-button {
+    margin-top: 5px;
+    padding: 4px 10px;
+    font-size: 13px;
+    height: auto;
+    line-height: 1.4;
+    white-space: nowrap;
+}
+
+.cpel-promo-button.cpel-promo-button-installed {
+    background: #cfd5d1;
+    color: #7f7f7f;
+    border-color: #cfd5d1;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: default;
+}
+
+.cpel-promo-image-section {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cpel-promo-image-section a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cpel-promo-image {
+    width: 72px;
+    height: auto;
+    display: block;
+}
+
+/* Tablet Responsive */
+@media screen and (max-width: 1024px) {
+    .cpel-promo-box {
+        gap: 15px;
+    }
+    
+    .cpel-promo-image {
+        width: 60px;
+    }
+}
+
+/* Mobile Responsive */
+@media screen and (max-width: 768px) {
+    .cpel-promo-box {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 12px 0;
+    }
+    
+    .cpel-promo-text-section {
+        width: 100%;
+    }
+    
+    .cpel-promo-text-section strong {
+        font-size: 13px;
+    }
+    
+    .cpel-promo-subtitle {
+        font-size: 11px;
+    }
+    
+    .cpel-promo-button {
+        font-size: 12px;
+        padding: 3px 8px;
+    }
+    
+    .cpel-promo-image-section {
+        align-self: flex-start;
+    }
+    
+    .cpel-promo-image {
+        width: 50px;
+    }
+}
+
+/* Small Mobile */
+@media screen and (max-width: 480px) {
+    .cpel-promo-box {
+        gap: 10px;
+        padding: 10px 0;
+    }
+    
+    .cpel-promo-text-section strong {
+        font-size: 12px;
+    }
+    
+    .cpel-promo-subtitle {
+        font-size: 10px;
+    }
+    
+    .cpel-promo-button {
+        font-size: 11px;
+        padding: 2px 6px;
+        margin-top: 3px;
+    }
+    
+    .cpel-promo-image {
+        width: 40px;
+    }
+}
+
+@media (max-width: 600px) {
+    .cpel-header-actions {
+        flex-direction: column;
+    }
+    
+    .cpel-header-actions .button {
+        width: 100%;
+    }
+}
+
+
+/* Tab functionality */
+.cpel-nav-tab-wrapper {
+    margin-bottom: 20px;
+}
+
+.cpel-nav-tab {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.nav-tab-active {
+    background-color: #fff;
+    border-bottom-color: #fff;
+}
+
+/* Hide all tab content by default */
+.cpel-tab-content {
+    display: none;
+}
+
+/* Show active tab content */
+.cpel-tab-content.active {
+    display: block;
+}
+
+/* Get started content styling */
+.cpel-get-started-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* Two-column layout */
+.cpel-content-wrapper {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+.cpel-content-left {
+    flex: 1;
+    min-width: 0;
+}
+
+.cpel-content-right {
+    flex: 1;
+    min-width: 300px;
+}
+
+/* Video section styling */
+.cpel-video-section {
+    padding: 20px;
+}
+
+.cpel-video-section h4 {
+    color: #1bb95a;
+    margin-bottom: 15px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.cpel-video-container {
+    position: relative;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.cpel-video-container iframe {
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.cpel-video-description {
+    text-align: center;
+    color: #666;
+    font-size: 14px;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.cpel-useful-links {
+    margin-top: 20px;
+}
+
+.cpel-useful-links h4 {
+    color: #1bb95a;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.cpel-useful-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.cpel-useful-links li {
+    margin-bottom: 8px;
+}
+
+.cpel-useful-links a {
+    color: #0073aa;
+    text-decoration: none;
+}
+
+.cpel-useful-links a:hover {
+    text-decoration: underline;
+}
+
+.cpel-get-started-content h3 {
+    color: #1bb95a;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.cpel-get-started-content h4 {
+    color: #333;
+    margin: 20px 0 10px 0;
+    font-size: 16px;
+}
+
+.cpel-get-started-content ul {
+    margin: 10px 0;
+    padding-left: 20px;
+}
+
+.cpel-get-started-content li {
+    margin-bottom: 5px;
+    line-height: 1.5;
+}
+
+.cpel-get-started-content .cpel-content-left ul {
+    list-style-type: disc !important;
+    list-style-position: outside;
+    margin-left: 1.5em;
+    padding-left: 0;
+    font-size: 14px !important;
+}
+
+.cpel-get-started-content .cpel-content-left ul li {
+    display: list-item !important;
+}
+
+.cpel-get-started-content p {
+    line-height: 1.6;
+    margin-bottom: 15px;
+    font-size: 14px !important;
+}
+
+/* Responsive design for mobile */
+@media only screen and (max-width: 768px) {
+    .cpel-content-wrapper {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .cpel-content-right {
+        min-width: auto;
+    }
+    
+    .cpel-video-container iframe {
+        height: 200px;
+    }
+}

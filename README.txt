@@ -5,7 +5,7 @@ Tags: elementor, polylang, multilingual, language switcher, dynamic tags
 Requires at least: 5.4
 Tested up to: 6.9
 Requires PHP: 5.6
-Stable tag: 2.5.5
+Stable tag: 2.6.0
 License: GPL-2.0-or-later
 License URI: https://opensource.org/licenses/GPL-2.0
 
@@ -14,6 +14,8 @@ Connect Polylang with Elementor: translated templates, language switcher widget,
 == Description ==
 
 Connect Polylang multilingual plugin with Elementor Page Builder: **Translate your Elementor templates** and show them in the correct language, native customizable **Language Switcher Elementor widget**, **Visibility Conditions** of widgets and **Dynamic Tags** by language and much more…
+
+https://www.youtube.com/watch?v=7DUh-bggJBs&feature=youtu.be
 
 ### What the Plugin Does
 
@@ -30,8 +32,6 @@ A native Elementor Widget to easily build a nice and fully customizable language
 * Show or hide flags, language name, language code.
 * Vertical list, Horizontal list or **styled dropdown**.
 * **SVG scalable flags**.
-
-https://www.youtube.com/watch?v=7DUh-bggJBs&feature=youtu.be
 
 
 #### 👁️ Language Visibility Conditions
@@ -61,8 +61,12 @@ From Elementor Finder you can access to Polylang settings pages and go the site 
 * Other integration fixes.
 
 
-[AI-powered translation for Polylang](https://coolplugins.net/product/autopoly-ai-translation-for-polylang/?ref=creame&utm_source=cpel_plugin&utm_medium=readme&utm_campaign=get_pro&utm_content=bottom_link) — AutoPoly instantly translates your Elementor, Gutenberg, and ACF content in one click while keeping your design exactly the same. [Check it now (affiliated link)](https://coolplugins.net/product/autopoly-ai-translation-for-polylang/?ref=creame&utm_source=cpel_plugin&utm_medium=readme&utm_campaign=get_pro&utm_content=bottom_link)
+### 🚀 AI-Powered Auto Translation for Polylang (AutoPoly)
 
+Translate your pages and posts in **one click** using **[AutoPoly](https://coolplugins.net/product/autopoly-ai-translation-for-polylang/?ref=creame&utm_source=cpel_plugin&utm_medium=readme&utm_campaign=get_pro&utm_content=bottom_link)**  and save hours of manual work.
+[AutoPoly](https://coolplugins.net/product/autopoly-ai-translation-for-polylang/?ref=creame&utm_source=cpel_plugin&utm_medium=readme&utm_campaign=get_pro&utm_content=bottom_link) is an **AI-powered translation addon for Polylang**. It instantly translates content built with **Elementor, Gutenberg, and ACF**, while keeping your layout and design exactly the same.
+
+**[Try AutoPoly](https://coolplugins.net/product/autopoly-ai-translation-for-polylang/?ref=creame&utm_source=cpel_plugin&utm_medium=readme&utm_campaign=get_pro&utm_content=bottom_link)**
 
 ### How to use
 You can manage translated templates in two ways:
@@ -112,7 +116,6 @@ The following code/classes are licensed under the GPL.
 * SVG flags from [FlagKit](https://github.com/madebybowtie/FlagKit) and [Wikipedia](https://wikipedia.org/)
 
 Please, send your suggestions and feedback - Thank you for using or trying out this plugin!
-
 
 
 == Installation ==
@@ -193,7 +196,7 @@ There are quite a few:
 
 
 = How can I translate Polylang pages automatically? =
-Use [AutoPoly ](https://coolplugins.net/product/autopoly-ai-translation-for-polylang/?ref=creame&utm_source=cpel_plugin&utm_medium=readme&utm_campaign=get_pro&utm_content=bottom_link) to auto-translate your Elementor and Gutenberg pages with AI in one click. [Check it now (affiliated link)](https://coolplugins.net/product/autopoly-ai-translation-for-polylang/?ref=creame&utm_source=cpel_plugin&utm_medium=readme&utm_campaign=get_pro&utm_content=bottom_link)
+Use [AutoPoly ](https://coolplugins.net/product/autopoly-ai-translation-for-polylang/?ref=creame&utm_source=cpel_plugin&utm_medium=readme&utm_campaign=get_pro&utm_content=bottom_link) to auto-translate your Elementor and Gutenberg pages with AI in one click. [Check it now](https://coolplugins.net/product/autopoly-ai-translation-for-polylang/?ref=creame&utm_source=cpel_plugin&utm_medium=readme&utm_campaign=get_pro&utm_content=bottom_link)
 
 = Where do I report security bugs found in this plugin? =
 Please report security bugs found in the source code of the undefined plugin through the [Patchstack Vulnerability Disclosure  Program](https://patchstack.com/database/vdp/ad44f834-19c4-470b-860f-d19657e7902a). The Patchstack team will assist you with verification, CVE assignment, and notify the developers of this plugin.
@@ -204,6 +207,14 @@ Please report security bugs found in the source code of the undefined plugin thr
 3. Preview how the Polylang–Elementor language switcher looks on the frontend.
 
 == Changelog ==
+
+= Version 2.6.0 | 2026-01-16 =
+
+* **Added:** New dashboard section with a **Getting Started** page to help users set up the plugin quickly.
+* **Added:** **Floating language switcher designer** to customize the language switcher visually, without coding.
+* **Added:** AutoPoly promotional admin notice.
+* **Improved:** Overall onboarding experience for first-time users.
+* **Improved:** Language switcher design and placement for better usability.
 
 = 2.5.5 =
 * Tweaks: Enhanced editor language switcher control

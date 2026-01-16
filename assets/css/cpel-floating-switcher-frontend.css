@@ -1,0 +1,499 @@
+/**
+ * Floating Language Switcher - Frontend Styles
+ * Handles the actual floating switcher display on the website
+ */
+
+/* ============================================
+   Base Floating Switcher
+   ============================================ */
+   .cpel-floating-switcher {
+    display: flex;
+    flex-direction: column-reverse;
+    position: fixed;
+    z-index: 99999;
+    overflow: hidden;
+    padding: var(--switcher-padding, 10px 0);
+    border: var(--border-width, 1px) solid var(--border-color, transparent);
+    border-radius: var(--border-radius, 8px);
+    background: var(--bg, #fff);
+    width: var(--switcher-width, auto);
+    top: var(--top, unset);
+    right: var(--right, unset);
+    bottom: var(--bottom, unset);
+    left: var(--left, unset);
+    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.08);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+/* Position adjustments for top placement */
+.cpel-switcher-position-top.cpel-floating-switcher {
+    flex-direction: column;
+    top: var(--wp-admin--admin-bar--height, 0);
+}
+
+.cpel-floating-switcher.cpel-switcher-position-top:not(.cpel-ls-inline) .cpel-language-switcher-inner,
+.cpel-floating-switcher.cpel-switcher-position-top .cpel-switcher-dropdown-list {
+    flex-direction: column;
+}
+
+/* ============================================
+   Switcher Inner Container
+   ============================================ */
+
+.cpel-language-switcher-inner{
+    padding: 10px 0px 10px 0px !important;
+}
+.cpel-floating-switcher .cpel-language-switcher-inner {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.cpel-ls-inline .cpel-language-switcher-inner {
+    flex-direction: row;
+}
+
+
+/* ============================================
+   Side-by-Side (Inline) Mode Styles
+   ============================================ */
+   
+/* Inline mode - all items in a row */
+.cpel-ls-inline .cpel-language-switcher-inner {
+    flex-direction: row !important;
+    gap: 0;
+}
+
+/* Inline mode language items */
+.cpel-ls-inline .cpel-language-item {
+    flex: 0 0 auto;
+}
+
+/* Remove border from last item */
+.cpel-ls-inline .cpel-language-item:last-child {
+    border-right: none;
+}
+
+/* Hover effect for inline items */
+.cpel-ls-inline .cpel-language-item:hover {
+    background: var(--bg-hover, #444) !important;
+}
+
+/* Hover text color for inline items */
+.cpel-ls-inline .cpel-language-item:hover .cpel-language-item-name {
+    color: var(--text-hover, #eee) !important;
+}
+
+/* Current language in inline mode should not have hover effect */
+.cpel-ls-dropdown .cpel-language-item__current:hover,
+.cpel-ls-dropdown .cpel-language-item__default:hover {
+    background: transparent !important;
+}
+.cpel-floating-switcher .cpel-language-switcher-inner {
+    width: auto !important;
+    overflow: visible !important;
+    min-width: 103px !important;
+}
+
+/* ============================================
+   Dropdown List
+   ============================================ */
+.cpel-switcher-dropdown-list {
+    display: flex;
+    flex-direction: column-reverse;
+    overflow-y: hidden;
+    transition: max-height var(--transition-duration, 0.2s) ease-in-out;
+    gap: 7px; 
+}
+
+/* Open state */
+.cpel-ls-dropdown.is-open .cpel-switcher-dropdown-list,
+.cpel-ls-dropdown[aria-expanded="true"] .cpel-switcher-dropdown-list {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: var(--text) transparent;
+}
+
+/* Transitioning state */
+.cpel-ls-dropdown.is-transitioning .cpel-switcher-dropdown-list {
+    overflow-y: hidden !important;
+}
+
+/* Webkit scrollbar styling */
+.cpel-switcher-dropdown-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.cpel-switcher-dropdown-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.cpel-switcher-dropdown-list::-webkit-scrollbar-thumb {
+    background: var(--text, #888);
+    border-radius: 3px;
+}
+
+.cpel-switcher-dropdown-list::-webkit-scrollbar-thumb:hover {
+    background: var(--text-hover, #555);
+}
+
+/* ============================================
+   Language Items
+   ============================================ */
+/* ============================================
+   Remove WordPress/Browser Default Pseudo-elements
+   ============================================ */
+.cpel-language-item::before,
+.cpel-language-item::after,
+.cpel-language-item__current::before,
+.cpel-language-item__current::after,
+.cpel-language-item__default::before,
+.cpel-language-item__default::after {
+    content: none !important;
+    display: none !important;
+}
+
+/* Remove any checkbox/button styling */
+.cpel-language-item[role="button"]::before,
+.cpel-language-item[role="button"]::after {
+    content: none !important;
+    display: none !important;
+}
+
+.cpel-language-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 3px 16px;
+    text-decoration: none;
+    min-height: 19px;
+    box-sizing: content-box;
+    color: var(--text, #000);
+    font-size: var(--font-size, 14px);
+    font-weight: 400;
+    transition: all var(--transition-duration, 0.2s) ease;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Dropdown items - apply background and text color from variables */
+.cpel-switcher-dropdown-list .cpel-language-item {
+    background: var(--bg, #fff) !important;
+    color: var(--text, #000) !important;
+}
+
+/* Dropdown items hover - background AND text color */
+.cpel-switcher-dropdown-list .cpel-language-item:hover {
+    background: var(--bg-hover, #f3f3f3) !important;
+    color: var(--text-hover, #000) !important;
+}
+
+/* Make sure text span inherits the hover color */
+.cpel-switcher-dropdown-list .cpel-language-item:hover .cpel-language-item-name {
+    color: var(--text-hover, #000) !important;
+}
+
+/* Current language (non-clickable) */
+.cpel-ls-dropdown .cpel-language-item__current {
+    pointer-events: none;
+    cursor: default;
+}
+
+.cpel-ls-dropdown .cpel-language-item__default {
+    pointer-events: none;
+    cursor: default;
+}
+
+.cpel-language-item .cpel-language-item__current .cpel-language-item-name{
+    overflow: visible !important;
+}
+
+/* When current language is a button control (for dropdown) */
+.cpel-language-item__current[role="button"] {
+    pointer-events: all;
+    cursor: pointer;
+}
+
+/* Current/default should NOT have hover effects */
+.cpel-ls-dropdown .cpel-language-item__current:hover,
+.cpel-ls-dropdown .cpel-language-item__default:hover {
+    background: transparent !important;
+}
+
+/* Focus styles */
+.cpel-language-item:focus {
+    outline: none;
+}
+
+.cpel-language-item:focus-visible {
+    outline: 2px solid var(--text);
+    outline-offset: -2px;
+}
+
+/* ============================================
+   Language Names
+   ============================================ */
+.cpel-language-item-name {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: inherit;
+}
+.cpel-language-item__current .cpel-language-item-name {
+    overflow: visible;
+    text-overflow: clip;
+}
+
+/* ============================================
+   Flag Images
+   ============================================ */
+.cpel-flag-image {
+    width: var(--flag-size, 18px);
+    height: auto;
+    border-radius: var(--flag-radius, 2px);
+    aspect-ratio: var(--aspect-ratio, 4/3);
+    object-fit: cover;
+    flex-shrink: 0;
+    display: block;
+}
+
+.cpel-flag-square {
+    aspect-ratio: 1;
+}
+
+.cpel-flag-rounded {
+    border-radius: 50%;
+}
+
+/* ============================================
+   Accessibility
+   ============================================ */
+/* Hidden but accessible */
+[hidden] {
+    display: none !important;
+}
+
+/* Inert elements */
+[inert] {
+    pointer-events: none;
+    cursor: default;
+    user-select: none;
+}
+
+[inert] * {
+    pointer-events: none;
+    cursor: default;
+    user-select: none;
+}
+
+/* Skip translation attribute */
+[data-no-translation] {
+    /* Marker for translation plugins to skip */
+}
+
+/* ============================================
+   Animations & Transitions
+   ============================================ */
+@keyframes cpel-fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.cpel-floating-switcher {
+    animation: cpel-fadeIn 0.3s ease-out;
+}
+
+/* ============================================
+   Responsive Adjustments
+   ============================================ */
+@media screen and (max-width: 768px) {
+    .cpel-floating-switcher {
+        /* Adjust positioning for mobile */
+        --right: 5vw !important;
+        --left: 5vw !important;
+    }
+    
+    .cpel-language-item {
+        padding: 10px 16px;
+        min-height: 24px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .cpel-floating-switcher {
+        /* Further adjustments for small screens */
+        font-size: 13px;
+    }
+}
+
+/* ============================================
+   Print Styles
+   ============================================ */
+@media print {
+    .cpel-floating-switcher {
+        display: none !important;
+    }
+}
+
+/* ============================================
+   High Contrast Mode Support
+   ============================================ */
+@media (prefers-contrast: high) {
+    .cpel-language-item {
+        border: 1px solid currentColor;
+    }
+    
+    .cpel-language-item:hover {
+        background: var(--text);
+        color: var(--bg);
+    }
+}
+
+/* ============================================
+   Reduced Motion Support
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    .cpel-floating-switcher,
+    .cpel-language-item,
+    .cpel-switcher-dropdown-list {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* ============================================
+   Dark Mode Support (Optional)
+   ============================================ */
+@media (prefers-color-scheme: dark) {
+    /* Use CSS variables, so theme colors will apply automatically */
+}
+
+/* ============================================
+   RTL Support
+   ============================================ */
+[dir="rtl"] .cpel-language-item {
+    text-align: right;
+}
+
+[dir="rtl"] .cpel-flag-image {
+    order: 2;
+}
+
+/* ============================================
+   Admin Bar Adjustment
+   ============================================ */
+body.admin-bar .cpel-switcher-position-top.cpel-floating-switcher {
+    top: 32px;
+}
+
+@media screen and (max-width: 782px) {
+    body.admin-bar .cpel-switcher-position-top.cpel-floating-switcher {
+        top: 46px;
+    }
+}
+
+/* ============================================
+   Z-Index Management
+   ============================================ */
+.cpel-floating-switcher {
+    z-index: 99999;
+}
+
+/* ============================================
+   Custom Hover Effects
+   ============================================ */
+.cpel-language-item {
+    position: relative;
+    overflow: hidden;
+}
+
+.cpel-language-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-hover, rgba(0, 0, 0, 0.05));
+    transition: left var(--transition-duration, 0.2s) ease;
+    pointer-events: none;
+}
+
+.cpel-language-item:hover::before {
+    left: 0;
+}
+
+/* Disable hover effect on current language */
+.cpel-language-item__default::before,
+.cpel-language-item__current:not([role="button"])::before {
+    display: none;
+}
+
+/* ============================================
+   Loading State (Optional)
+   ============================================ */
+.cpel-floating-switcher.is-loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* ============================================
+   Error State (Optional)
+   ============================================ */
+.cpel-floating-switcher.has-error {
+    border: 2px solid #d63638;
+}
+
+/* ============================================
+   Compatibility Fixes
+   ============================================ */
+/* Reset any theme overrides */
+.cpel-floating-switcher * {
+    box-sizing: border-box;
+}
+
+.cpel-language-item {
+    font-family: inherit;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: none;
+    letter-spacing: normal;
+    word-spacing: normal;
+}
+
+/* Ensure flags don't inherit weird image styles from themes */
+.cpel-flag-image {
+    max-width: none;
+    height: auto;
+    vertical-align: middle;
+    border: none;
+    box-shadow: none;
+    margin: 0;
+    padding: 0;
+}
+/* Dropdown Arrow Icon */
+.cpel-dropdown-arrow {
+    margin-left: auto;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+    pointer-events: none;
+}
+
+/* Rotate arrow when dropdown is open - using existing .is-open class */
+.cpel-ls-dropdown.is-open .cpel-dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+/* Ensure the current language item has proper flex layout for arrow */
+.cpel-language-item__current[role="button"] {
+    display: flex !important;
+    align-items: center;
+    gap: 8px;
+}

@@ -199,6 +199,28 @@ There are quite a few:
 
 ## Changelog
 
+## Version 2.6.0 | 2026-01-16 
+
+* **Added:** New dashboard section with a **Getting Started** page to help users set up the plugin quickly.
+* **Added:** **Floating language switcher designer** to customize the language switcher visually, without coding.
+* **Added:** AutoPoly promotional admin notice.
+* **Improved:** Overall onboarding experience for first-time users.
+* **Improved:** Language switcher design and placement for better usability.
+
+## 2.5.5 
+* Tweaks: Enhanced editor language switcher control
+* Tweaks: Remove load_plugin_textdomain
+* Compatibility: Tested with Elementor 3.34.0
+
+## 2.5.4 
+* Added: Registered with Patchstack Vulnerability Disclosure Program
+* Added: New screenshots
+* Tweaks: Added affiliated links.
+* Tweaks: Minor text improvements.
+* Compatibility: Tested with WordPress 6.9, Elementor v3.33.2 and Polylang v3.7.5.
+* Tweaks: Updated readme video and made small textual adjustments.
+* Removed: Old screenshots and outdated links
+
 ## 2.5.3
 * Fix language visibility don't work with cache.
 
