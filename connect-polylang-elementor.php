@@ -20,8 +20,8 @@
  * Requires WP:       5.4
  * Requires PHP:      5.6
  * Requires Plugins:  polylang, elementor
- * Elementor tested up to: 3.34.0
- * Elementor Pro tested up to: 3.34.0
+ * Elementor tested up to: 3.34.1
+ * Elementor Pro tested up to: 3.34.1
  *
  * Copyright (c) 2021 Paco Toledo - CREAME
  * Copyright (c) 2018-2021 David Decker - DECKERWEB
@@ -120,11 +120,7 @@ function setup() {
 	if ( is_admin() || is_network_admin() ) {
         // Initialize dashboard
 		require_once CPEL_DIR . 'admin/dashboard/cpel-dashboard.php';
-		cpel_polylang_addon_settings_page(
-			'polylang-addons',  // plugin tag
-			'cpel-dashboard',   // menu slug
-			'Connect Polylang Elementor Dashboard'  // dashboard heading
-		);
+		cpel_polylang_addon_settings_page();
 		 // Initialize Floating Switcher Settings
 		 require_once CPEL_DIR . 'admin/class-cpel-floating-switcher-settings.php';
 		 \ConnectPolylangElementor\CPEL_Floating_Lang_Switcher_Settings::get_instance();

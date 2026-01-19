@@ -43,6 +43,9 @@ class CPEL_AutoPoly_Notice
  */
     public function dismiss_notice_ajax()
     {
+        if (!current_user_can('manage_options')) {
+            wp_send_json_error(['message' => 'Permission denied']);
+        }
         check_ajax_referer('cpel_dismiss_notice', 'nonce');
         
         $user_id = get_current_user_id();
@@ -122,7 +125,7 @@ class CPEL_AutoPoly_Notice
             'id' => self::NOTICE_ID,
             'icon' => '',
             'type' => 'info',
-            'description' => esc_html__('Translate your pages and posts with one click  using AutoPoly. Save time and effort.', 'connect-polylang-elementor'),
+            'description' => esc_html__('Translate your pages and posts with one click using AutoPoly. Save time and effort.', 'connect-polylang-elementor'),
             'button' => [
             'text' => esc_html($button_text),
             'url' => '#',
@@ -149,7 +152,7 @@ class CPEL_AutoPoly_Notice
         // Enqueue the centralized AutoPoly helper
         wp_enqueue_script(
             'cpel-autopoly-helper',
-            CPEL_Helpers::get_plugin_url() . 'admin/dashboard/assets/js/autopoly-helper.js',
+            CPEL_Helpers::get_plugin_url() . 'admin/dashboard/assets/js/autopoly-helper.min.js',
             [ 'jquery' ],
             CPEL_PLUGIN_VERSION,
             true
@@ -170,15 +173,11 @@ class CPEL_AutoPoly_Notice
         ob_start();
         ?>
         jQuery(document).ready(function($) {
-            function initCPELNotice() {
                 var $installBtn = $('.cpel-autopoly-action-btn');
-                
-                if (!$installBtn.length) {
-                    setTimeout(initCPELNotice, 100);
+                if(!$installBtn.length) {
                     return;
                 }
-                
-                // Use .data() to set (matches autopoly-helper.js which uses .data() to read)
+
                 $installBtn.data('nonce', '<?php echo esc_js($nonce); ?>');
                 $installBtn.data('context', 'elementor_notice');
                 
@@ -190,6 +189,8 @@ class CPEL_AutoPoly_Notice
                         $.post(ajaxurl, {
                             action: 'cpel_dismiss_autopoly_notice',
                             nonce: '<?php echo esc_js(wp_create_nonce('cpel_dismiss_notice')); ?>'
+                        }).fail(function() {
+                            console.error('Failed to dismiss notice');
                         });
                         
                         var $notice = $installBtn.closest('.e-notice');
@@ -202,16 +203,14 @@ class CPEL_AutoPoly_Notice
                     }, 2000);
                 });
 
-// Also handle manual dismiss button click
-$installBtn.closest('.e-notice').find('.e-notice__dismiss').on('click', function() {
-    $.post(ajaxurl, {
-        action: 'cpel_dismiss_autopoly_notice',
-        nonce: '<?php echo esc_js(wp_create_nonce('cpel_dismiss_notice')); ?>'
-    });
-});
-            }
-            
-            initCPELNotice();
+                $installBtn.closest('.e-notice').find('.e-notice__dismiss').on('click', function() {
+                    $.post(ajaxurl, {
+                        action: 'cpel_dismiss_autopoly_notice',
+                        nonce: '<?php echo esc_js(wp_create_nonce('cpel_dismiss_notice')); ?>'
+                    }).fail(function() {
+                        console.error('Failed to dismiss notice');
+                    });
+                });
         });
         <?php
         return ob_get_clean();

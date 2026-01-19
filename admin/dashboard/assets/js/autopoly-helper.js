@@ -136,7 +136,9 @@
          * Show message to user
          */
         showMessage: function (message, type) {
-            alert(message);
+            if (type === 'error') {
+                console.error('[AutoPoly Error]', message);
+            }
         }
     };
     

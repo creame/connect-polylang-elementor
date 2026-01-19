@@ -49,7 +49,7 @@ class ElementorAssets {
 			return;
 		}
 
-		$is_preview = ! empty( sanitize_key( wp_unslash( $_GET['elementor_preview'] ) ) );
+		$is_preview = isset( $_GET['elementor_preview'] ) && ! empty( sanitize_key( wp_unslash( $_GET['elementor_preview'] ) ) );
 
 		if ( ! cpel_is_elementor_editor() && ! $is_preview ) {
 			return;

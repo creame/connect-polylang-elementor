@@ -6,7 +6,7 @@ if (!defined('ABSPATH')) {
 } 
 
 /**
- * This is the main class for creating dashbord addon page and all submenu items
+ * This is the main class for creating dashboard addon page and all submenu items
  * 
  * Do not call or initialize this class directly, instead use the function mentioned at the bottom of this file
  */
@@ -18,7 +18,6 @@ class CPEL_Polylang_Addons
      None of these variables should be accessable from the outside of the class
      */
     private static $instance;
-    private $plugin_tag = null;
     private $addon_dir = __DIR__; 
 
     /**
@@ -38,15 +37,10 @@ class CPEL_Polylang_Addons
              /**
               * Initialize the dashboard with specific plugins as per plugin tag
               */
-    public function show_plugins( $plugin_tag , $menu_slug , $dashboard_heading )
+    public function show_plugins()
     {
-        if(!empty($plugin_tag) && !empty($menu_slug) && !empty($dashboard_heading) ) {
-            $this->plugin_tag = $plugin_tag;
-        }else{
-            return false;
-        }
-        add_action('admin_menu', array($this, 'init_plugins_dasboard_page'), 10);
-        add_action('wp_ajax_cool_plugins_activate_'. $this->plugin_tag, array($this, 'cool_plugins_activate'));
+        add_action('admin_menu', array($this, 'init_plugins_dashboard_page'), 10);
+        add_action('wp_ajax_cpel_plugins_activate_'. CPEL_BASENAME, array($this, 'cpel_plugins_activate'));
         add_action('admin_enqueue_scripts', array($this,'enqueue_required_scripts'));
         add_action('admin_head', array($this, 'remove_admin_notices'), 1);
     }
@@ -77,9 +71,9 @@ public function remove_admin_notices() {
              /**
               * handle ajax request for activating plugin from dashboard
               */
-    function cool_plugins_activate()
+    function cpel_plugins_activate()
     {
-        if(current_user_can('upload_plugins')) {
+        if(current_user_can('activate_plugins')) {
                    
             $plugin_slug = isset($_POST['polylang_activate_slug']) ? sanitize_text_field(wp_unslash($_POST['polylang_activate_slug'])) : '';
                 
@@ -93,15 +87,15 @@ public function remove_admin_notices() {
                 
                     $plugin_base_arr=explode("/", $pluginBase);
                 if(isset($plugin_base_arr[0]) && $plugin_base_arr[0]==$plugin_slug ) {
-                    activate_plugin($pluginBase);
+                    activate_plugin($pluginBase, '', false, true);
                   
                 }else{
                     wp_send_json_error('Something wrong with plugin path.');
                     wp_die();
                 }
             }else{
-                                  wp_send_json_error('Plugin slug is missing.');
-                                  wp_die();  
+                 wp_send_json_error('Plugin slug is missing.');
+                 wp_die();  
             }
         }else{
             wp_send_json_error('You have no permission to do this action.');
@@ -113,7 +107,7 @@ public function remove_admin_notices() {
              /**
               * This function will initialize the main dashboard page for all plugins
               */
-    function init_plugins_dasboard_page()
+    function init_plugins_dashboard_page()
     {
         add_submenu_page(
             'mlang',
@@ -166,7 +160,7 @@ public function remove_admin_notices() {
         }
                  echo '</div>';
                 
-                 echo '</div>'; // .wrap
+                 echo '</div>'; 
     }
             
     function get_started_content()
@@ -197,68 +191,62 @@ public function remove_admin_notices() {
               * Lets enqueue all the required CSS & JS
               */
 
-function enqueue_required_scripts($hook)
-{
-    // Get current screen
-    $screen = get_current_screen();
-    if (!$screen) {
-        return;
-    }
-    
-    // Define pages where CSS should load
-    $load_css_on_pages = [
-        'languages_page_cpel-get-started',  // Getting Started
-        'languages_page_cpel-floating-switcher',  // Floating Switcher
-    ];
-    
-    // Pages where AutoPoly helper JS should load (promo box present)
-    $load_autopoly_js_on_pages = [
-        'languages_page_cpel-get-started',  // Has promo box
-    ];
-    
-    // Check if we should load CSS
-    $should_load_css = false;
-    
-    // 1. Always load CSS on plugin's own pages
-    if (in_array($screen->id, $load_css_on_pages, true)) {
-        $should_load_css = true;
-    }
-    
-    // 2. Check if the notice will be shown (for both CSS and JS)
-    $show_notice = $this->should_show_autopoly_notice($screen);
-    if ($show_notice) {
-        $should_load_css = true;
-    }
-    
-    // Enqueue CSS if needed
-    if ($should_load_css) {
-        wp_enqueue_style(
-            'cpel-plugins-polylang-addon', 
-            CPEL_Helpers::get_plugin_url() . 'admin/dashboard/assets/css/styles.min.css', 
-            array(), 
-            CPEL_PLUGIN_VERSION, 
-            'all'
-        );
+    function enqueue_required_scripts()
+    {
+        // Get current screen
+        $screen = get_current_screen();
+        if (!$screen) {
+            return;
+        }
         
-        wp_localize_script(
-            'cpel-plugins-polylang-addon', 
-            'cpel_polylang', 
-            array('ajax_url' => admin_url('admin-ajax.php'))
-        );
+        // Define pages where CSS should load
+        $load_css_on_pages = [
+            'languages_page_cpel-get-started',  // Getting Started
+            'languages_page_cpel-floating-switcher',  // Floating Switcher
+        ];
+        
+        // Pages where AutoPoly helper JS should load (promo box present)
+        $load_autopoly_js_on_pages = [
+            'languages_page_cpel-get-started',  // Has promo box
+        ];
+        
+        // Check if we should load CSS
+        $should_load_css = false;
+        
+        // 1. Always load CSS on plugin's own pages
+        if (in_array($screen->id, $load_css_on_pages, true)) {
+            $should_load_css = true;
+        }
+        
+        // 2. Check if the notice will be shown (for both CSS and JS)
+        $show_notice = $this->should_show_autopoly_notice($screen);
+        if ($show_notice) {
+            $should_load_css = true;
+        }
+        
+        // Enqueue CSS if needed
+        if ($should_load_css) {
+            wp_enqueue_style(
+                'cpel-plugins-polylang-addon', 
+                CPEL_Helpers::get_plugin_url() . 'admin/dashboard/assets/css/styles.min.css', 
+                array(), 
+                CPEL_PLUGIN_VERSION, 
+                'all'
+            );
+        }
+        
+        // Enqueue AutoPoly helper JS where needed
+        // Load on: notice pages OR plugin pages with promo box
+        if ($show_notice || in_array($screen->id, $load_autopoly_js_on_pages, true)) {
+            wp_enqueue_script(
+                'cpel-autopoly-helper',
+                CPEL_Helpers::get_plugin_url() . 'admin/dashboard/assets/js/autopoly-helper.min.js',
+                array('jquery'),
+                CPEL_PLUGIN_VERSION,
+                true
+            );
+        }
     }
-    
-    // Enqueue AutoPoly helper JS where needed
-    // Load on: notice pages OR plugin pages with promo box
-    if ($show_notice || in_array($screen->id, $load_autopoly_js_on_pages, true)) {
-        wp_enqueue_script(
-            'cpel-autopoly-helper',
-            CPEL_Helpers::get_plugin_url() . 'admin/dashboard/assets/js/autopoly-helper.min.js',
-            array('jquery'),
-            CPEL_PLUGIN_VERSION,
-            true
-        );
-    }
-}
 
  /**
  * Check if AutoPoly notice should be shown
@@ -303,9 +291,9 @@ private function should_show_autopoly_notice($screen)
     /**
      * initialize the main dashboard class with all required parameters
      */
-function cpel_polylang_addon_settings_page($tag ,$settings_page_slug, $dashboard_heading )
+function cpel_polylang_addon_settings_page()
 {
     $polylang_page = CPEL_Polylang_Addons::init();
-    $polylang_page->show_plugins($tag, $settings_page_slug, $dashboard_heading);
+    $polylang_page->show_plugins();
 
 }

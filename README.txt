@@ -208,13 +208,15 @@ Please report security bugs found in the source code of the undefined plugin thr
 
 == Changelog ==
 
-= Version 2.6.0 | 2026-01-16 =
+= Version 2.6.0 | 2026-01-19 =
 
 * **Added:** New dashboard section with a **Getting Started** page to help users set up the plugin quickly.
 * **Added:** **Floating language switcher designer** to customize the language switcher visually, without coding.
 * **Added:** AutoPoly promotional admin notice.
 * **Improved:** Overall onboarding experience for first-time users.
 * **Improved:** Language switcher design and placement for better usability.
+* **Compatibility:** Elementor v3.34.1 and Polylang v3.7.6.
+* **Improved:** Minor code Improvements.
 
 = 2.5.5 =
 * Tweaks: Enhanced editor language switcher control
