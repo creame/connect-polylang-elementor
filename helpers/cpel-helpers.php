@@ -190,26 +190,12 @@ class CPEL_Helpers {
 	 */
 	public static function get_autopoly_button_text( $status ) {
 		if ( $status['active'] ) {
-			return __( 'Upgrade to PRO', 'connect-polylang-elementor' );
+			return __( 'Go to Settings', 'connect-polylang-elementor' );
 		}
 		if ( $status['installed'] ) {
 			return __( 'Activate', 'connect-polylang-elementor' );
 		}
-		return __( 'Try AutoPoly', 'connect-polylang-elementor' );
-	}
-
-	/**
-	 * Get AutoPoly PRO upgrade URL with UTM parameters.
-	 *
-	 * @since 2.5.6
-	 * @param string $utm_content UTM content parameter.
-	 * @return string Full URL.
-	 */
-	public static function get_autopoly_pro_url( $utm_content = 'default' ) {
-		return sprintf(
-			'https://coolplugins.net/product/autopoly-ai-translation-for-polylang/?ref=creame&utm_source=cpel_plugin&utm_medium=inside&utm_campaign=get_pro&utm_content=%s',
-			esc_attr( $utm_content )
-		);
+		return __( 'Install AutoPoly', 'connect-polylang-elementor' );
 	}
 
 	/**
@@ -236,18 +222,37 @@ class CPEL_Helpers {
 		$status = self::get_autopoly_status();
 		$is_active = $status['active'];
 		$button_text = self::get_autopoly_button_text( $status );
-		$pro_url = self::get_autopoly_pro_url( $context );
+		$docs_url = 'https://docs.coolplugins.net/plugin/ai-translation-for-polylang/?utm_source=cpel_plugin&utm_medium=inside&utm_campaign=docs&utm_content=get_started';
 		$action_url = self::get_autopoly_action_url( $is_active );
 		$plugin_url = CPEL_Helpers::get_plugin_url();
 		?>
 		<div class="cpel-promo-box">
-			<div class="cpel-promo-text-section">
-				<strong><?php echo esc_html__( 'AutoPoly - AI Translation For Polylang', 'connect-polylang-elementor' ); ?></strong>
-				<span class="cpel-promo-subtitle"><?php echo esc_html__( 'Automatically translate pages and posts built with Elementor or Gutenberg using AI in one click. Save time and effort.', 'connect-polylang-elementor' ); ?></span>
-				
+			<div class="cpel-promo-main">
+				<div class="cpel-promo-image-section">
+					<img
+						class="cpel-promo-image"
+						src="<?php echo esc_url( $plugin_url . 'admin/dashboard/assets/images/autopoly-ai-translation-for-polylang-pro.png' ); ?>"
+						alt="<?php echo esc_attr__( 'AutoPoly logo', 'connect-polylang-elementor' ); ?>"
+					>
+				</div>
+
+				<div class="cpel-promo-text-section">
+					<div class="cpel-promo-header-row">
+						<strong class="cpel-promo-title">
+							<?php echo esc_html__( 'AutoPoly - AI Translation For Polylang', 'connect-polylang-elementor' ); ?>
+						</strong>
+					</div>
+
+					<p class="cpel-promo-subtitle">
+						<?php echo esc_html__( 'Automatically translate pages and posts built with Elementor or Gutenberg using AI in one click. Save time and effort.', 'connect-polylang-elementor' ); ?>
+					</p>
+				</div>
+			</div>
+
+			<div class="cpel-promo-actions">
 				<?php if ( ! $is_active ) : ?>
-					<button 
-						class="button button-primary cpel-promo-button cpel-autopoly-action-btn" 
+					<button
+						class="button button-primary cpel-promo-button cpel-autopoly-action-btn"
 						type="button"
 						data-context="<?php echo esc_attr( $context ); ?>"
 						data-nonce="<?php echo esc_attr( wp_create_nonce( 'cpel_install_autopoly' ) ); ?>"
@@ -255,23 +260,23 @@ class CPEL_Helpers {
 						<?php echo esc_html( $button_text ); ?>
 					</button>
 				<?php else : ?>
-					<a 
-						href="<?php echo esc_url( $pro_url ); ?>" 
-						class="button button-primary cpel-promo-button" 
-						target="_blank" 
+					<a
+						href="<?php echo esc_url( $action_url ); ?>"
+						class="button button-primary cpel-promo-button"
+						target="_blank"
 						rel="noopener noreferrer"
 					>
 						<?php echo esc_html( $button_text ); ?>
 					</a>
 				<?php endif; ?>
-			</div>
-			<div class="cpel-promo-image-section">
-				<a href="<?php echo esc_url( $action_url ); ?>" target="_blank" rel="noopener noreferrer">
-					<img 
-						class="cpel-promo-image" 
-						src="<?php echo esc_url( $plugin_url . 'admin/dashboard/assets/images/autopoly-ai-translation-for-polylang-pro.png' ); ?>" 
-						alt="<?php echo esc_attr__( 'AutoPoly logo', 'connect-polylang-elementor' ); ?>"
-					>
+
+				<a
+					href="<?php echo esc_url( $docs_url ); ?>"
+					class="button button-secondary cpel-promo-button-secondary"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					<?php esc_html_e( 'View Docs', 'connect-polylang-elementor' ); ?>
 				</a>
 			</div>
 		</div>

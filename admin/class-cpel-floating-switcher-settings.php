@@ -59,11 +59,13 @@ class CPEL_Floating_Lang_Switcher_Settings
     public function enqueue_assets( $hook )
     {   
     
-        // Check if we're on the Get Started page with floating-switcher tab
+        // Check if we're on the Get Started page with floating-switcher tab.
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- GET used only for conditional asset loading; values sanitized, no state change.
         $page = isset($_GET['page']) ? sanitize_key(wp_unslash($_GET['page'])) : '';
-        $tab = isset($_GET['tab']) ? sanitize_key(wp_unslash($_GET['tab'])) : '';
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- GET used only for conditional asset loading; values sanitized, no state change.
+        $tab  = isset($_GET['tab']) ? sanitize_key(wp_unslash($_GET['tab'])) : '';
 
-        if ($page === 'cpel-get-started' && $tab === 'floating-switcher' ) {
+        if ( $page === 'cpel-get-started' && $tab === 'floating-switcher' ) {
             
             $plugin_url = CPEL_Helpers::get_plugin_url();
             
@@ -120,8 +122,7 @@ class CPEL_Floating_Lang_Switcher_Settings
         'installNonce'  => wp_create_nonce('cpel_install_autopoly'),
         'ajaxUrl'       => admin_url('admin-ajax.php'),
         'pluginUrl'     => plugins_url('/', CPEL_FILE),
-        'autoPolyStatus' => $autopoly_status,
-        'autoPolyProUrl' => CPEL_Helpers::get_autopoly_pro_url('floating_switcher'),
+        'autoPolyStatus' => $autopoly_status
         ];
     }
 
@@ -350,6 +351,9 @@ class CPEL_Floating_Lang_Switcher_Settings
             if (is_wp_error($activation_result) ) {
                 wp_send_json_error([ 'message' => $activation_result->get_error_message() ]);
             }
+        }
+        if(!get_option('cpel_autopoly_installed')) {
+            update_option('cpel_autopoly_installed', 'installed_by_cpel');
         }
         
         wp_send_json_success(

@@ -19,15 +19,6 @@
     --cpel-error: #d63638;
 }
 
-/* ============================================
-   FLOATING SWITCHER PAGE SPECIFIC
-   ============================================ */
-
-/* Ensure the floater app fits within the tab content wrapper */
-.cpel-tab-content-wrapper #cpel-floater-app-root {
-    padding-top: 20px;
-}
-
 /* Notice styling within tab content */
 .cpel-tab-content-wrapper .notice {
     margin: 20px 0;
@@ -378,7 +369,6 @@
    ============================================ */
 .cpel-settings-actions {
     display: flex;
-    justify-content: center;
     gap: 12px;
     border-radius: 8px;
     margin-bottom: 20px;

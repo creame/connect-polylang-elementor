@@ -282,8 +282,58 @@
         );
       }
   
+      /**
+       * Render an icon button with hover effects
+       * @param {Object} config - Button configuration
+       * @param {string} config.href - Button URL
+       * @param {string} config.title - Button tooltip
+       * @param {string} config.color - Button icon color
+       * @param {Function} config.icon - Function that returns SVG icon element
+       * @param {string} config.ariaLabel - Accessibility label
+       */
+      renderIconButton({ href, title, color, icon, ariaLabel }) {
+        return h(
+          "a",
+          {
+            href: href,
+            target: "blank",
+            rel: "noopener noreferrer",
+            className: "cpel-icon-button",
+            title: title,
+            "aria-label": ariaLabel || title,
+            style: {
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "32px",
+              height: "32px",
+              borderRadius: "4px",
+              backgroundColor: "#f0f0f1",
+              color: color,
+              textDecoration: "none",
+              transition: "all 0.2s ease",
+              cursor: "pointer",
+              border: "1px solid transparent"
+            },
+            onMouseOver: (e) => {
+              e.currentTarget.style.backgroundColor = color;
+              e.currentTarget.style.color = "#fff";
+              e.currentTarget.style.transform = "translateY(-2px)";
+              e.currentTarget.style.boxShadow = "0 2px 8px rgba(0,0,0,0.15)";
+            },
+            onMouseOut: (e) => {
+              e.currentTarget.style.backgroundColor = "#f0f0f1";
+              e.currentTarget.style.color = color;
+              e.currentTarget.style.transform = "translateY(0)";
+              e.currentTarget.style.boxShadow = "none";
+            }
+          },
+          icon()
+        );
+      }
+  
       renderPreviewBox() {
-        const { config, currentDevice } = this.state;
+        const { config, currentDevice, hasChanges } = this.state;
       
         return h(
           "div",
@@ -295,6 +345,60 @@
               "span",
               { className: "cpel-title" },
               __("Switcher Preview", "connect-polylang-elementor")
+            ),
+            h(
+              "div",
+              { 
+                className: "cpel-header-buttons", 
+                style: { 
+                  display: "flex", 
+                  gap: "8px", 
+                  marginLeft: "auto",
+                  alignItems: "center"
+                } 
+              },
+              this.renderIconButton({
+                href: "https://docs.coolplugins.net/doc/add-language-switcher-elementor/?ref=creame&utm_source=cpel_plugin&utm_medium=inside&utm_campaign=docs&utm_content=floating_switcher",
+                title: __("View Documentation", "connect-polylang-elementor"),
+                color: "#2271b1",
+                ariaLabel: __("Open documentation in new tab", "connect-polylang-elementor"),
+                icon: () => h(
+                  "svg",
+                  {
+                    width: "16",
+                    height: "16",
+                    viewBox: "0 0 24 24",
+                    fill: "none",
+                    stroke: "currentColor",
+                    strokeWidth: "2",
+                    strokeLinecap: "round",
+                    strokeLinejoin: "round"
+                  },
+                  h("path", { d: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" }),
+                  h("polyline", { points: "14 2 14 8 20 8" }),
+                  h("line", { x1: "16", y1: "13", x2: "8", y2: "13" }),
+                  h("line", { x1: "16", y1: "17", x2: "8", y2: "17" }),
+                  h("polyline", { points: "10 9 9 9 8 9" })
+                )
+              }),
+              this.renderIconButton({
+                href: "https://www.youtube.com/watch?v=1jyQJbZPT9E",
+                title: __("Watch Video Tutorial", "connect-polylang-elementor"),
+                color: "#ff0000",
+                ariaLabel: __("Open video tutorial in new tab", "connect-polylang-elementor"),
+                icon: () => h(
+                  "svg",
+                  {
+                    width: "18",
+                    height: "18",
+                    viewBox: "0 0 24 24",
+                    fill: "currentColor"
+                  },
+                  h("path", { 
+                    d: "M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" 
+                  })
+                )
+              })
             )
           ),
           h(
@@ -373,68 +477,98 @@
       }
   
   renderAutoPolyPromo() {
-    
     const autoPolyStatus = window.cpelFloaterData?.autoPolyStatus || { installed: false, active: false };
     const isInstalled = autoPolyStatus.installed;
     const isActive = autoPolyStatus.active;
-    
-    const buttonText = isActive 
-      ? __("Upgrade to PRO", "connect-polylang-elementor")
-      : (isInstalled 
+    const context = "floating_switcher";
+
+    const buttonText = isActive
+      ? __("Go to Settings", "connect-polylang-elementor")
+      : (isInstalled
         ? __("Activate", "connect-polylang-elementor")
-        : __("Try AutoPoly", "connect-polylang-elementor"));
-    
-    const proUrl = window.AutoPolyConfig 
-      ? window.AutoPolyConfig.getProUrl('floating_switcher')
-      : (window.cpelFloaterData?.autoPolyProUrl || "https://coolplugins.net/product/autopoly-ai-translation-for-polylang/?ref=creame&utm_source=cpel_plugin&utm_medium=inside&utm_campaign=get_pro&utm_content=floating_switcher");
-    
-    const actionUrl = isActive 
-      ? "admin.php?page=polylang-atfp-dashboard" 
+        : __("Install AutoPoly", "connect-polylang-elementor"));
+
+    const actionUrl = isActive
+      ? "admin.php?page=polylang-atfp-dashboard"
       : "plugin-install.php?s=autopoly&tab=search&type=term";
-    
+
+    const docsUrl = "https://docs.coolplugins.net/plugin/ai-translation-for-polylang/?utm_source=cpel_plugin&utm_medium=inside&utm_campaign=docs&utm_content=get_started";
+
+    const pluginUrl = window.cpelFloaterData?.pluginUrl
+      ? `${window.cpelFloaterData.pluginUrl}admin/dashboard/assets/images/autopoly-ai-translation-for-polylang-pro.png`
+      : "";
+
     return h(
       "div",
-      { className: "cpel-promo-box" },
+      { className: "cpel-promo-box cpel-promo-box-floating-switcher" },
       h(
         "div",
-        { className: "cpel-promo-text-section" },
-        h("strong", null, __("AutoPoly - AI Translation For Polylang", "connect-polylang-elementor")),
-        h("span", { className: "cpel-promo-subtitle" }, __("Translate pages instantly with one-click.", "connect-polylang-elementor")),
-        
-        !isActive ? h(
-          "button",
-          {
-            className: "button button-primary cpel-promo-button",
-            type: "button",
-            onClick: this.handleInstallAutoPoly.bind(this)
-          },
-          buttonText
-        ) : h(
-          "a",
-          {
-            href: proUrl,
-            className: "button button-primary cpel-promo-button cpel-promo-button-upgrade",
-            target: "_blank",
-            rel: "noopener noreferrer"
-          },
-          buttonText
+        { className: "cpel-promo-main" },
+        h(
+          "div",
+          { className: "cpel-promo-image-section" },
+          h("img", {
+            className: "cpel-promo-image",
+            src: pluginUrl,
+            alt: __("AutoPoly logo", "connect-polylang-elementor")
+          })
+        ),
+        h(
+          "div",
+          { className: "cpel-promo-text-section" },
+          h(
+            "div",
+            { className: "cpel-promo-header-row" },
+            h(
+              "strong",
+              { className: "cpel-promo-title" },
+              __("AutoPoly - AI Translation For Polylang", "connect-polylang-elementor")
+            )
+          ),
+          h(
+            "p",
+            { className: "cpel-promo-subtitle" },
+            __(
+              "Automatically translate pages and posts built with Elementor or Gutenberg using AI in one click. Save time and effort.",
+              "connect-polylang-elementor"
+            )
+          )
         )
       ),
       h(
         "div",
-        { className: "cpel-promo-image-section" },
+        { className: "cpel-promo-actions" },
+        !isActive
+          ? h(
+              "button",
+              {
+                className: "button button-primary cpel-promo-button cpel-autopoly-action-btn",
+                type: "button",
+                "data-context": context,
+                "data-nonce": window.cpelFloaterData?.installNonce || "",
+                onClick: this.handleInstallAutoPoly.bind(this)
+              },
+              buttonText
+            )
+          : h(
+              "a",
+              {
+                href: actionUrl,
+                className: "button button-primary cpel-promo-button",
+                target: "_blank",
+                rel: "noopener noreferrer"
+              },
+              buttonText
+            ),
         h(
           "a",
-          { 
-            href: actionUrl, 
+          {
+            href: docsUrl,
+            className: "button button-secondary cpel-promo-button-secondary",
             target: "_blank",
             rel: "noopener noreferrer"
           },
-          h("img", {
-            className: "cpel-promo-image",
-            src: window.cpelFloaterData?.pluginUrl ? `${window.cpelFloaterData.pluginUrl}admin/dashboard/assets/images/autopoly-ai-translation-for-polylang-pro.png` : "",
-            alt: "AutoPoly logo"
-          })
+          __("View Docs", "connect-polylang-elementor")
         )
       )
     );
@@ -474,17 +608,14 @@
     .then(response => response.json())
     .then(data => {
       if (data.success) {
-        const proUrl = window.AutoPolyConfig 
-          ? window.AutoPolyConfig.getProUrl(context)
-          : window.cpelFloaterData.autoPolyProUrl;
         
-        const upgradeLink = document.createElement("a");
-        upgradeLink.href = proUrl;
-        upgradeLink.className = "button button-primary cpel-promo-button cpel-promo-button-upgrade";
-        upgradeLink.target = "_blank";
-        upgradeLink.rel = "noopener noreferrer";
-        upgradeLink.textContent = __("Upgrade to PRO", "connect-polylang-elementor");
-        button.parentNode.replaceChild(upgradeLink, button);
+      const settingsLink = document.createElement("a");
+        settingsLink.href = "admin.php?page=polylang-atfp-dashboard";
+        settingsLink.className = "button button-primary cpel-promo-button cpel-promo-button-upgrade";
+        settingsLink.target = "_self";
+        settingsLink.rel = "noopener noreferrer";
+        settingsLink.textContent = __("Go to Settings", "connect-polylang-elementor");
+        button.parentNode.replaceChild(settingsLink, button);
         
         this.showInstallMessage("success", data.data.message || __("Plugin installed and activated successfully!", "connect-polylang-elementor"));
       } else {

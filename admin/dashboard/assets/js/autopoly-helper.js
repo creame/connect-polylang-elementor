@@ -13,15 +13,7 @@
      * AutoPoly configuration - centralized URLs and settings
      */
     var AutoPolyConfig = {
-        proUrlBase: 'https://coolplugins.net/product/autopoly-ai-translation-for-polylang/',
-        proUrlParams: '?ref=creame&utm_source=cpel_plugin&utm_medium=inside&utm_campaign=get_pro',
-        
-        /**
-         * Get PRO URL with context
-         */
-        getProUrl: function (context) {
-            return this.proUrlBase + this.proUrlParams + '&utm_content=' + (context || 'default');
-        },
+        autopolySettingsUrl: 'admin.php?page=polylang-atfp-dashboard',
         
         /**
          * Get processing text based on button text
@@ -103,7 +95,7 @@
             // This will cause the notice to be dismissed automatically
             $(document).trigger('autopoly-success', [context, response]);
             
-            // Hide the notice immediately (no PRO button shown)
+            // Hide the notice immediately (no AutoPoly Settings button shown)
             setTimeout(
                 function () {
                     $btn.closest('.notice, .e-notice').fadeOut();
@@ -141,11 +133,91 @@
             }
         }
     };
+
+    /**
+     * Get Started - Apply Now button (AJAX + fade out)
+     */
+    function initGetStartedApplyNow() {
+        var $form = $('.cpel-gs-notice-apply-form');
+
+        if ( ! $form.length || typeof window.cpelGetStartedApply === 'undefined' ) {
+            return;
+        }
+
+        $form.on(
+            'submit',
+            function (e) {
+                e.preventDefault();
+
+                var $currentForm = $(this);
+                var $btn = $currentForm.find('.cpel-gs-notice-apply');
+                var originalText = $btn.text();
+
+                $btn
+                    .prop('disabled', true)
+                    .text(window.cpelGetStartedApply.applying)
+                    .addClass('cpel-gs-notice-apply--busy');
+
+                $.post(
+                    window.cpelGetStartedApply.ajax_url,
+                    {
+                        action: window.cpelGetStartedApply.action,
+                        _wpnonce_cpel_set_default_language_elementor_library: $currentForm
+                            .find("input[name='_wpnonce_cpel_set_default_language_elementor_library']")
+                            .val()
+                    }
+                )
+                    .done(
+                        function (response) {
+                            if (response.success) {
+                                var $notice  = $currentForm.closest('.cpel-gs-notice');
+                                var $message = $notice.find('.cpel-gs-notice-text');
+
+                                if (window.cpelGetStartedApply.success) {
+                                    $message.text(window.cpelGetStartedApply.success);
+                                }
+
+                                // Mark notice as success state and hide the button.
+                                $notice.addClass('cpel-gs-notice--success');
+                                $btn.hide();
+
+                                // Keep the green success message visible briefly, then fade out.
+                                setTimeout(
+                                    function () {
+                                        $notice.fadeOut(
+                                            1000,
+                                            function () {
+                                                $notice.remove();
+                                            }
+                                        );
+                                    },
+                                    2000
+                                );
+                            } else {
+                                $btn
+                                    .prop('disabled', false)
+                                    .removeClass('cpel-gs-notice-apply--busy')
+                                    .text(originalText);
+                            }
+                        }
+                    )
+                    .fail(
+                        function () {
+                            $btn
+                                .prop('disabled', false)
+                                .removeClass('cpel-gs-notice-apply--busy')
+                                .text(originalText);
+                        }
+                    );
+            }
+        );
+    }
     
     // Initialize on document ready
     $(document).ready(
         function () {
             AutoPolyHandler.init();
+            initGetStartedApplyNow();
         }
     );
     

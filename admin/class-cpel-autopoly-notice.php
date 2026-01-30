@@ -39,8 +39,8 @@ class CPEL_AutoPoly_Notice
     }
 
     /**
- * Handle AJAX dismissal of notice
- */
+     * Handle AJAX dismissal of notice
+     */
     public function dismiss_notice_ajax()
     {
         if (!current_user_can('manage_options')) {
