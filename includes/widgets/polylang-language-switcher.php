@@ -713,6 +713,7 @@ class PolylangLanguageSwitcher extends Widget_Base {
 			array(
 				'nav'  => array(
 					'class' => 'cpel-switcher__nav',
+					'aria-label' => esc_attr__( 'Language switcher', 'elementor' ),
 				),
 				'icon' => array(
 					'class'       => array(
