@@ -171,9 +171,9 @@ class PolylangLanguageSwitcher extends Widget_Base {
 		$this->add_control(
 			'switcher_name',
 			array(
-				'label' => esc_html__( 'Switcher name', 'elementor' ),
+				'label' => esc_html__( 'Switcher name', 'connect-polylang-elementor' ),
 				'type' => Controls_Manager::TEXT,
-				'default' => esc_html__( 'Language switcher', 'elementor' ),
+				'default' => esc_html__( 'Language switcher', 'connect-polylang-elementor' ),
 			)
 		);
 
