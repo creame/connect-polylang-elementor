@@ -10,7 +10,7 @@
  * Plugin Name:       Connect Polylang for Elementor
  * Plugin URI:        https://github.com/creame/connect-polylang-elementor
  * Description:       Connect Polylang with Elementor. Display templates in the correct language, language switcher widget, language visibility conditions and dynamic tags.
- * Version:           2.5.6
+ * Version:           2.5.5
  * Author:            Creame
  * Author URI:        https://crea.me/
  * License:           GPL-2.0-or-later
@@ -20,8 +20,8 @@
  * Requires WP:       5.4
  * Requires PHP:      5.6
  * Requires Plugins:  polylang, elementor
- * Elementor tested up to: 3.35.0
- * Elementor Pro tested up to: 3.35.0
+ * Elementor tested up to: 3.34.0
+ * Elementor Pro tested up to: 3.34.0
  *
  * Copyright (c) 2021 Paco Toledo - CREAME
  * Copyright (c) 2018-2021 David Decker - DECKERWEB
@@ -37,7 +37,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 2.0.0
  */
-define( 'CPEL_PLUGIN_VERSION', '2.5.6' );
+define( 'CPEL_PLUGIN_VERSION', '2.5.5' );
 define( 'CPEL_FILE', __FILE__ );
 define( 'CPEL_DIR', plugin_dir_path( CPEL_FILE ) );
 define( 'CPEL_BASENAME', plugin_basename( CPEL_FILE ) );
