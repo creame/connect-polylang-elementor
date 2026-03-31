@@ -463,7 +463,7 @@ class ConnectPlugins {
 			$instances     = $theme_builder->get_conditions_manager()->get_document_instances( $default_post );
 
 			if ( empty( $instances ) ) {
-				$instances = array( 'none' => esc_html__( 'None', 'elementor-pro' ) ); // phpcs:ignore WordPress.WP.I18n
+				$instances = array( 'none' => esc_html__( 'None', 'connect-polylang-elementor' ) );
 			}
 
 			echo '<span style="opacity:.4">' . esc_html( implode( ', ', $instances ) ) . '</span><div class="hidden" aria-hidden="true">';
@@ -691,8 +691,8 @@ class ConnectPlugins {
 						'name'  => "cpel-{$language->slug}",
 						'icon'  => 'eicon-plus',
 						'title' => $use_emojis
-							? sprintf( __( 'Add a translation — %s', 'connect-polylang-elementor' ), cpel_flag_emoji( $language->flag_code ) ) // phpcs:ignore WordPress.WP.I18n
-							: sprintf( __( 'Add a translation in %s', 'polylang' ), $language->name ), // phpcs:ignore WordPress.WP.I18n
+							? sprintf( __( 'Add a translation — %s', 'connect-polylang-elementor' ), cpel_flag_emoji( $language->flag_code ) )
+							: sprintf( __( 'Add a translation in %s', 'connect-polylang-elementor' ), $language->name ),
 						'type'  => 'link',
 						'link'  => $link,
 					);
@@ -701,7 +701,7 @@ class ConnectPlugins {
 
 			$group = array(
 				'name'  => 'cpel',
-				'title' => __( 'Languages', 'polylang' ), // phpcs:ignore WordPress.WP.I18n
+				'title' => __( 'Languages', 'connect-polylang-elementor' ),
 				'items' => $items,
 			);
 
@@ -829,13 +829,13 @@ class ConnectPlugins {
 			$instances     = $theme_builder->get_conditions_manager()->get_document_instances( $default_post );
 
 			if ( empty( $instances ) ) {
-				$instances = array( 'no_instances' => esc_html__( 'No instances', 'elementor-pro' ) ); // phpcs:ignore WordPress.WP.I18n
+				$instances = array( 'no_instances' => esc_html__( 'No instances', 'connect-polylang-elementor' ) );
 				$is_active = false;
 			} else {
 				$is_active = 'publish' === $data['status'];
 			}
 
-			$data['instances'] = array( 'cpel' => sprintf( esc_html__( '(from %s)', 'connect-polylang-elementor' ), strtoupper( $language ) ) ) + $instances; // phpcs:ignore WordPress.WP.I18n
+			$data['instances'] = array( 'cpel' => sprintf( esc_html__( '(from %s)', 'connect-polylang-elementor' ), strtoupper( $language ) ) ) + $instances;
 			$data['isActive']  = $is_active;
 		}
 
@@ -922,7 +922,7 @@ class ConnectPlugins {
 		$document->start_controls_section(
 			'cpel_language_section',
 			array(
-				'label' => esc_html__( 'Languages', 'polylang' ), // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
+				'label' => esc_html__( 'Languages', 'connect-polylang-elementor' ),
 				'tab'   => \Elementor\Controls_Manager::TAB_SETTINGS,
 			)
 		);
@@ -971,7 +971,7 @@ class ConnectPlugins {
 				$lang_parts['class'] .= ' add-new';
 				$lang_parts['icon']   = '<i class="eicon-plus"></i>';
 				$lang_parts['href']   = $create_link;
-				$lang_parts['text']   = '<span class="text">' . sprintf( esc_html__( 'Add a translation in %s', 'polylang' ), strtolower( esc_html( $language->name ) ) ) . '</span>';  // phpcs:ignore WordPress.WP.I18n
+				$lang_parts['text']   = '<span class="text">' . sprintf( esc_html__( 'Add a translation in %s', 'connect-polylang-elementor' ), strtolower( esc_html( $language->name ) ) ) . '</span>';
 			}
 
 			$raw_html .= sprintf(

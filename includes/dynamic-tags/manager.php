@@ -37,7 +37,7 @@ class Manager {
 	public function register_dynamic_tags( $dynamic_tags ) {
 
 		// Register our tag group.
-		Plugin::instance()->dynamic_tags->register_group( self::TAG_GROUP, array( 'title' => __( 'Languages', 'polylang' ) ) ); // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
+		Plugin::instance()->dynamic_tags->register_group( self::TAG_GROUP, array( 'title' => __( 'Languages', 'connect-polylang-elementor' ) ) );
 
 		// Register the tags.
 		if ( cpel_elementor_min_version( '3.5.0' ) ) {

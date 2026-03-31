@@ -33,7 +33,7 @@ class LanguageFlag extends Data_Tag {
 		$this->add_control(
 			'language',
 			array(
-				'label'   => __( 'Language', 'polylang' ), // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
+				'label'   => __( 'Language', 'connect-polylang-elementor' ),
 				'type'    => Controls_Manager::SELECT,
 				'options' => $options,
 				'default' => 'current',

@@ -52,7 +52,7 @@ class PolylangLanguageSwitcher extends Widget_Base {
 	 */
 	public function get_title() {
 
-		return __( 'Language switcher', 'polylang' ); // phpcs:ignore WordPress.WP.I18n
+		return __( 'Language switcher', 'connect-polylang-elementor' );
 
 	}
 
@@ -165,7 +165,7 @@ class PolylangLanguageSwitcher extends Widget_Base {
 		/** Content: Layout etc. */
 		$this->start_controls_section(
 			'section_content',
-			array( 'label' => __( 'Content', 'elementor' ) ) // phpcs:ignore WordPress.WP.I18n
+			array( 'label' => __( 'Content', 'connect-polylang-elementor' ) )
 		);
 
 		$this->add_control(
@@ -180,11 +180,11 @@ class PolylangLanguageSwitcher extends Widget_Base {
 		$this->add_control(
 			'layout',
 			array(
-				'label'        => __( 'Layout', 'elementor' ), // phpcs:ignore WordPress.WP.I18n
+				'label'        => __( 'Layout', 'connect-polylang-elementor' ),
 				'type'         => Controls_Manager::SELECT,
 				'options'      => array(
-					'horizontal' => __( 'Horizontal', 'elementor' ), // phpcs:ignore WordPress.WP.I18n
-					'vertical'   => __( 'Vertical', 'elementor' ), // phpcs:ignore WordPress.WP.I18n
+					'horizontal' => __( 'Horizontal', 'connect-polylang-elementor' ),
+					'vertical'   => __( 'Vertical', 'connect-polylang-elementor' ),
 					'dropdown'   => __( 'Dropdown', 'connect-polylang-elementor' ),
 				),
 				'default'      => 'horizontal',
@@ -196,23 +196,23 @@ class PolylangLanguageSwitcher extends Widget_Base {
 		$this->add_control(
 			'align_items',
 			array(
-				'label'        => __( 'Alignment', 'elementor' ), // phpcs:ignore WordPress.WP.I18n
+				'label'        => __( 'Alignment', 'connect-polylang-elementor' ),
 				'type'         => Controls_Manager::CHOOSE,
 				'options'      => array(
 					'left'    => array(
-						'title' => __( 'Left', 'elementor' ), // phpcs:ignore WordPress.WP.I18n
+						'title' => __( 'Left', 'connect-polylang-elementor' ),
 						'icon'  => 'eicon-h-align-left',
 					),
 					'center'  => array(
-						'title' => __( 'Center', 'elementor' ), // phpcs:ignore WordPress.WP.I18n
+						'title' => __( 'Center', 'connect-polylang-elementor' ),
 						'icon'  => 'eicon-h-align-center',
 					),
 					'right'   => array(
-						'title' => __( 'Right', 'elementor' ), // phpcs:ignore WordPress.WP.I18n
+						'title' => __( 'Right', 'connect-polylang-elementor' ),
 						'icon'  => 'eicon-h-align-right',
 					),
 					'justify' => array(
-						'title' => __( 'Stretch', 'elementor' ), // phpcs:ignore WordPress.WP.I18n
+						'title' => __( 'Stretch', 'connect-polylang-elementor' ),
 						'icon'  => 'eicon-h-align-stretch',
 					),
 				),
@@ -223,7 +223,7 @@ class PolylangLanguageSwitcher extends Widget_Base {
 		$this->add_control(
 			'hide_current',
 			array(
-				'label'        => __( 'Hides the current language', 'polylang' ), // phpcs:ignore WordPress.WP.I18n
+				'label'        => __( 'Hides the current language', 'connect-polylang-elementor' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
 				'default'      => '',
@@ -234,7 +234,7 @@ class PolylangLanguageSwitcher extends Widget_Base {
 		$this->add_control(
 			'hide_missing',
 			array(
-				'label'        => __( 'Hides languages with no translation', 'polylang' ), // phpcs:ignore WordPress.WP.I18n
+				'label'        => __( 'Hides languages with no translation', 'connect-polylang-elementor' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
 				'default'      => '',
@@ -244,7 +244,7 @@ class PolylangLanguageSwitcher extends Widget_Base {
 		$this->add_control(
 			'show_country_flag',
 			array(
-				'label'        => __( 'Displays flags', 'polylang' ), // phpcs:ignore WordPress.WP.I18n
+				'label'        => __( 'Displays flags', 'connect-polylang-elementor' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
 				'default'      => 'yes',
@@ -254,7 +254,7 @@ class PolylangLanguageSwitcher extends Widget_Base {
 		$this->add_control(
 			'show_language_name',
 			array(
-				'label'        => __( 'Displays language names', 'polylang' ), // phpcs:ignore WordPress.WP.I18n
+				'label'        => __( 'Displays language names', 'connect-polylang-elementor' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
 				'default'      => 'yes',
@@ -286,7 +286,7 @@ class PolylangLanguageSwitcher extends Widget_Base {
 
 		$this->start_controls_tab(
 			'tab_menu_item_normal',
-			array( 'label' => __( 'Normal', 'elementor' ) ) // phpcs:ignore WordPress.WP.I18n
+			array( 'label' => __( 'Normal', 'connect-polylang-elementor' ) )
 		);
 
 		$this->add_group_control(
@@ -301,7 +301,7 @@ class PolylangLanguageSwitcher extends Widget_Base {
 		$this->add_control(
 			'color_menu_item',
 			array(
-				'label'     => __( 'Text Color', 'elementor' ), // phpcs:ignore WordPress.WP.I18n
+				'label'     => __( 'Text Color', 'connect-polylang-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'global'    => array( 'default' => Global_Colors::COLOR_TEXT ),
 				'default'   => '',
@@ -315,7 +315,7 @@ class PolylangLanguageSwitcher extends Widget_Base {
 		$this->add_control(
 			'bg_dropdown_item',
 			array(
-				'label'     => __( 'Background Color', 'elementor' ), // phpcs:ignore WordPress.WP.I18n
+				'label'     => __( 'Background Color', 'connect-polylang-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#FFFFFF',
 				'selectors' => array(
@@ -329,7 +329,7 @@ class PolylangLanguageSwitcher extends Widget_Base {
 
 		$this->start_controls_tab(
 			'tab_menu_item_hover',
-			array( 'label' => __( 'Hover', '__elementor' ) ) // phpcs:ignore WordPress.WP.I18n
+			array( 'label' => __( 'Hover', 'connect-polylang-elementor' ) )
 		);
 
 		$this->add_group_control(
@@ -344,7 +344,7 @@ class PolylangLanguageSwitcher extends Widget_Base {
 		$this->add_control(
 			'color_menu_item_hover',
 			array(
-				'label'     => __( 'Text Color', 'elementor' ), // phpcs:ignore WordPress.WP.I18n
+				'label'     => __( 'Text Color', 'connect-polylang-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'global'    => array( 'default' => Global_Colors::COLOR_ACCENT ),
 				'selectors' => array(
@@ -356,7 +356,7 @@ class PolylangLanguageSwitcher extends Widget_Base {
 		$this->add_control(
 			'bg_dropdown_hover',
 			array(
-				'label'     => __( 'Background Color', 'elementor' ), // phpcs:ignore WordPress.WP.I18n
+				'label'     => __( 'Background Color', 'connect-polylang-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#D9D9D9',
 				'selectors' => array(
@@ -371,7 +371,7 @@ class PolylangLanguageSwitcher extends Widget_Base {
 		$this->start_controls_tab(
 			'tab_menu_item_active',
 			array(
-				'label'     => __( 'Active', 'elementor' ), // phpcs:ignore WordPress.WP.I18n
+				'label'     => __( 'Active', 'connect-polylang-elementor' ),
 				'condition' => array(
 					'hide_current!' => 'yes',
 					'layout!'       => 'dropdown',
@@ -391,7 +391,7 @@ class PolylangLanguageSwitcher extends Widget_Base {
 		$this->add_control(
 			'color_menu_item_active',
 			array(
-				'label'     => __( 'Text Color', 'elementor' ), // phpcs:ignore WordPress.WP.I18n
+				'label'     => __( 'Text Color', 'connect-polylang-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
 				'selectors' => array( '{{WRAPPER}} .cpel-switcher__lang--active a' => 'color: {{VALUE}}' ),
@@ -434,7 +434,7 @@ class PolylangLanguageSwitcher extends Widget_Base {
 		$this->add_responsive_control(
 			'menu_space_between',
 			array(
-				'label'     => __( 'Space Between', 'elementor' ), // phpcs:ignore WordPress.WP.I18n
+				'label'     => __( 'Space Between', 'connect-polylang-elementor' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => array(
 					'px' => array( 'max' => 100 ),
@@ -483,11 +483,11 @@ class PolylangLanguageSwitcher extends Widget_Base {
 				'type'         => Controls_Manager::CHOOSE,
 				'options'      => array(
 					'down' => array(
-						'title' => __( 'Down', 'elementor' ), // phpcs:ignore WordPress.WP.I18n
+						'title' => __( 'Down', 'connect-polylang-elementor' ),
 						'icon'  => 'eicon-arrow-down',
 					),
 					'up'   => array(
-						'title' => __( 'Up', 'elementor' ), // phpcs:ignore WordPress.WP.I18n
+						'title' => __( 'Up', 'connect-polylang-elementor' ),
 						'icon'  => 'eicon-arrow-up',
 					),
 				),
@@ -499,7 +499,7 @@ class PolylangLanguageSwitcher extends Widget_Base {
 		$this->add_control(
 			'dropdown_icon',
 			array(
-				'label'                  => __( 'Icon', 'elementor' ), // phpcs:ignore WordPress.WP.I18n
+				'label'                  => __( 'Icon', 'connect-polylang-elementor' ),
 				'type'                   => Controls_Manager::ICONS,
 				'fa4compatibility'       => 'icon',
 				'recommended'            => array(
@@ -523,7 +523,7 @@ class PolylangLanguageSwitcher extends Widget_Base {
 		$this->add_control(
 			'dropdown_icon_indent',
 			array(
-				'label'     => __( 'Icon Spacing', 'elementor' ), // phpcs:ignore WordPress.WP.I18n
+				'label'     => __( 'Icon Spacing', 'connect-polylang-elementor' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => array(
 					'px' => array( 'max' => 50 ),
@@ -545,7 +545,7 @@ class PolylangLanguageSwitcher extends Widget_Base {
 		$this->start_controls_section(
 			'country_flag_section',
 			array(
-				'label'     => __( 'Flag', 'polylang' ), // phpcs:ignore WordPress.WP.I18n
+				'label'     => __( 'Flag', 'connect-polylang-elementor' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => array( 'show_country_flag' => 'yes' ),
 			)
@@ -564,7 +564,7 @@ class PolylangLanguageSwitcher extends Widget_Base {
 		$this->add_control(
 			'aspect_ratio_flag',
 			array(
-				'label'        => __( 'Aspect Ratio', 'elementor' ), // phpcs:ignore WordPress.WP.I18n
+				'label'        => __( 'Aspect Ratio', 'connect-polylang-elementor' ),
 				'type'         => Controls_Manager::SELECT,
 				'options'      => array(
 					'43' => '4:3',
@@ -579,7 +579,7 @@ class PolylangLanguageSwitcher extends Widget_Base {
 		$this->add_responsive_control(
 			'size_flag',
 			array(
-				'label'     => __( 'Size', 'elementor' ), // phpcs:ignore WordPress.WP.I18n
+				'label'     => __( 'Size', 'connect-polylang-elementor' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => array(
 					'px' => array( 'min' => 16 ),
@@ -596,7 +596,7 @@ class PolylangLanguageSwitcher extends Widget_Base {
 		$this->add_responsive_control(
 			'border_radius_flag',
 			array(
-				'label'      => __( 'Border Radius', 'elementor' ), // phpcs:ignore WordPress.WP.I18n
+				'label'      => __( 'Border Radius', 'connect-polylang-elementor' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => array( 'px', '%' ),
 				'range'      => array(
@@ -626,7 +626,7 @@ class PolylangLanguageSwitcher extends Widget_Base {
 		$this->add_responsive_control(
 			'text_indent_language_name',
 			array(
-				'label'     => __( 'Text Indent', 'elementor' ), // phpcs:ignore WordPress.WP.I18n
+				'label'     => __( 'Text Indent', 'connect-polylang-elementor' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => array(
 					'px' => array( 'max' => 50 ),
@@ -656,7 +656,7 @@ class PolylangLanguageSwitcher extends Widget_Base {
 		$this->add_control(
 			'uppercase_language_code',
 			array(
-				'label'        => _x( 'Uppercase', 'Typography Control', 'elementor' ), // phpcs:ignore WordPress.WP.I18n
+				'label'        => _x( 'Uppercase', 'Typography Control', 'connect-polylang-elementor' ),
 				'type'         => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
 				'default'      => 'yes',
@@ -666,7 +666,7 @@ class PolylangLanguageSwitcher extends Widget_Base {
 		$this->add_responsive_control(
 			'text_indent_language_code',
 			array(
-				'label'     => __( 'Text Indent', 'elementor' ), // phpcs:ignore WordPress.WP.I18n
+				'label'     => __( 'Text Indent', 'connect-polylang-elementor' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => array(
 					'px' => array( 'max' => 50 ),
@@ -681,7 +681,7 @@ class PolylangLanguageSwitcher extends Widget_Base {
 		$this->add_control(
 			'before_language_code',
 			array(
-				'label' => __( 'Before', 'elementor' ), // phpcs:ignore WordPress.WP.I18n
+				'label' => __( 'Before', 'connect-polylang-elementor' ),
 				'type'  => Controls_Manager::TEXT,
 			)
 		);
@@ -689,7 +689,7 @@ class PolylangLanguageSwitcher extends Widget_Base {
 		$this->add_control(
 			'after_language_code',
 			array(
-				'label' => __( 'After', 'elementor' ), // phpcs:ignore WordPress.WP.I18n
+				'label' => __( 'After', 'connect-polylang-elementor' ),
 				'type'  => Controls_Manager::TEXT,
 			)
 		);

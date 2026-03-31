@@ -26,7 +26,7 @@ class PolylangCategory extends Base_Category {
 	 */
 	public function get_title() {
 
-		return __( 'Languages', 'polylang' ); // phpcs:ignore WordPress.WP.I18n
+		return __( 'Languages', 'connect-polylang-elementor' );
 
 	}
 
