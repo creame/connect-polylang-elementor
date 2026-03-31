@@ -169,6 +169,15 @@ class PolylangLanguageSwitcher extends Widget_Base {
 		);
 
 		$this->add_control(
+			'switcher_name',
+			array(
+				'label' => esc_html__( 'Switcher name', 'connect-polylang-elementor' ),
+				'type' => Controls_Manager::TEXT,
+				'default' => esc_html__( 'Language switcher', 'connect-polylang-elementor' ),
+			)
+		);
+
+		$this->add_control(
 			'layout',
 			array(
 				'label'        => __( 'Layout', 'elementor' ), // phpcs:ignore WordPress.WP.I18n
@@ -713,6 +722,7 @@ class PolylangLanguageSwitcher extends Widget_Base {
 			array(
 				'nav'  => array(
 					'class' => 'cpel-switcher__nav',
+					'aria-label' => esc_attr( $settings['switcher_name'] ?? '' ),
 				),
 				'icon' => array(
 					'class'       => array(
