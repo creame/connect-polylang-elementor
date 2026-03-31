@@ -10,7 +10,7 @@
  * Plugin Name:       Connect Polylang for Elementor
  * Plugin URI:        https://github.com/creame/connect-polylang-elementor
  * Description:       Connect Polylang with Elementor. Display templates in the correct language, language switcher widget, language visibility conditions and dynamic tags.
- * Version:           2.5.5
+ * Version:           2.6.0
  * Author:            Creame
  * Author URI:        https://crea.me/
  * License:           GPL-2.0-or-later
@@ -20,8 +20,8 @@
  * Requires WP:       5.4
  * Requires PHP:      5.6
  * Requires Plugins:  polylang, elementor
- * Elementor tested up to: 3.34.0
- * Elementor Pro tested up to: 3.34.0
+ * Elementor tested up to: 3.34.1
+ * Elementor Pro tested up to: 3.34.1
  *
  * Copyright (c) 2021 Paco Toledo - CREAME
  * Copyright (c) 2018-2021 David Decker - DECKERWEB
@@ -37,7 +37,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 2.0.0
  */
-define( 'CPEL_PLUGIN_VERSION', '2.5.5' );
+define( 'CPEL_PLUGIN_VERSION', '2.6.0' );
 define( 'CPEL_FILE', __FILE__ );
 define( 'CPEL_DIR', plugin_dir_path( CPEL_FILE ) );
 define( 'CPEL_BASENAME', plugin_basename( CPEL_FILE ) );
@@ -77,7 +77,19 @@ spl_autoload_register(
 
 // Initialize plugin.
 add_action( 'plugins_loaded', 'ConnectPolylangElementor\\setup', 20 );
-
+/**
+ * Redirect to Get Started page after plugin activation
+ * 
+ * @since 2.5.6
+ * @param string $plugin Path to the plugin file relative to the plugins directory.
+ */
+function redirect_on_activation( $plugin ) {
+	if ( $plugin === CPEL_BASENAME ) {
+		wp_safe_redirect( admin_url( 'admin.php?page=cpel-get-started' ) );
+		exit;
+	}
+}
+add_action( 'activated_plugin', 'ConnectPolylangElementor\\redirect_on_activation' );
 // Fixes CROSS Domain issues (add before Elementor & Polylang start).
 add_filter( 'plugins_url', 'ConnectPolylangElementor\\fix_cross_domain_assets' );
 add_filter( 'pll_context', 'ConnectPolylangElementor\\fix_elementor_editor_context' );
@@ -93,7 +105,7 @@ add_filter( 'pll_context', 'ConnectPolylangElementor\\fix_elementor_editor_conte
 function setup() {
 
 	require CPEL_DIR . 'includes/functions.php';
-
+    require CPEL_DIR . 'helpers/cpel-helpers.php';
 	if ( cpel_is_polylang_api_active() && cpel_is_elementor_active() ) {
 
 		ElementorAssets::instance();
@@ -106,9 +118,18 @@ function setup() {
 	}
 
 	if ( is_admin() || is_network_admin() ) {
-
+        // Initialize dashboard
+		require_once CPEL_DIR . 'admin/dashboard/cpel-dashboard.php';
+		cpel_polylang_addon_settings_page();
+		 // Initialize Floating Switcher Settings
+		 require_once CPEL_DIR . 'admin/class-cpel-floating-switcher-settings.php';
+		 \ConnectPolylangElementor\CPEL_Floating_Lang_Switcher_Settings::get_instance();
+		 require_once CPEL_DIR . 'admin/class-cpel-autopoly-notice.php';
 		AdminExtras::instance();
 
+	}
+	if (!is_admin()) {
+		require_once CPEL_DIR . 'includes/class-cpel-floating-switcher-frontend.php';
 	}
 }
 

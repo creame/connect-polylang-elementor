@@ -91,11 +91,10 @@ class AdminExtras {
 		if ( CPEL_BASENAME === $cpel_file ) {
 
 			$cpel_links[] = sprintf(
-				'<a href="%1$s" title="%2$s" target="_blank" rel="noopener noreferrer">%3$s <small><b>(%4$s)</b></small></a>',
+				'<a href="%1$s" title="%2$s" target="_blank" rel="noopener noreferrer">%3$s </a>',
 				esc_url( 'https://coolplugins.net/product/autopoly-ai-translation-for-polylang/?ref=creame&utm_source=cpel_plugin&utm_medium=inside&utm_campaign=get_pro&utm_content=plugins_list' ),
 				esc_html__( 'AI Translation For Polylang', 'connect-polylang-elementor' ),
-				esc_html__( 'AI Translation', 'connect-polylang-elementor' ),
-				esc_html__( 'Affiliated', 'connect-polylang-elementor' ),
+				esc_html__( 'AI Translation', 'connect-polylang-elementor' )
 			);
 
 		}

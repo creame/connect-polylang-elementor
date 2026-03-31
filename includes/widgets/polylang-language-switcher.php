@@ -698,6 +698,46 @@ class PolylangLanguageSwitcher extends Widget_Base {
 
 	}
 
+	/**
+ * Get SVG icon based on icon type
+ *
+ * @param string $icon_name The icon identifier
+ * @return string SVG icon HTML
+ */
+private function get_svg_icon( $icon_name ) {
+    
+    $svg = '';
+    
+    switch ( $icon_name ) {
+        case 'caret-down':
+        case 'fas fa-caret-down':
+            $svg = '<svg class="cpel-switcher__icon" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M5 6L0.669873 0.75L9.33013 0.75L5 6Z" fill="currentColor"/></svg>';
+            break;
+            
+        case 'chevron-down':
+        case 'fas fa-chevron-down':
+            $svg = '<svg class="cpel-switcher__icon" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
+            break;
+            
+        case 'angle-down':
+        case 'fas fa-angle-down':
+            $svg = '<svg class="cpel-switcher__icon" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
+            break;
+            
+        case 'plus':
+        case 'fas fa-plus':
+            $svg = '<svg class="cpel-switcher__icon" width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M5 1V9M1 5H9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
+            break;
+            
+        default:
+            // Default caret down
+            $svg = '<svg class="cpel-switcher__icon" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M5 6L0.669873 0.75L9.33013 0.75L5 6Z" fill="currentColor"/></svg>';
+            break;
+    }
+    
+    return $svg;
+}
+
 
 	/**
 	 * Render the widget output on the frontend.
@@ -819,8 +859,9 @@ class PolylangLanguageSwitcher extends Widget_Base {
 				unset( $lang_links[ $lang_code ] );
 
 				if ( ! empty( $settings['dropdown_icon']['value'] ) && count( $lang_links ) ) {
-					$lang_link = str_replace( '</a>', '<i ' . $this->get_render_attribute_string( 'icon' ) . '></i></a>', $lang_link );
-				}
+				$icon_svg = $this->get_svg_icon( $settings['dropdown_icon']['value'] );
+				$lang_link = str_replace( '</a>', $icon_svg . '</a>', $lang_link );
+}
 
 				$output .= '<div class="cpel-switcher__toggle cpel-switcher__lang" onclick="this.classList.toggle(\'cpel-switcher__toggle--on\')">' . $lang_link . '</div>';
 			}

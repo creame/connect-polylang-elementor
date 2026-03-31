@@ -121,8 +121,11 @@
 }
 
 .cpel-switcher--layout-dropdown .cpel-switcher__lang a {
-    display: block;
-    text-align: left;
+    display: flex;
+    align-items: center;
+}
+.cpel-switcher__icon{
+   width: 23px;
 }
 
 /* Toggle dropdown on hover only for desktop */
