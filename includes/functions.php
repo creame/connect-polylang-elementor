@@ -114,6 +114,43 @@ function cpel_is_elementor_editor() {
 }
 
 /**
+ * Post ID of the document open in the Elementor editor (page load or AJAX).
+ *
+ * @since 2.5.6
+ *
+ * @return int Post ID, or 0 if not in the Elementor editor context.
+ */
+function cpel_get_elementor_editor_post_id() {
+
+	if ( cpel_is_elementor_editor() ) {
+		return absint( $_GET['post'] );
+	}
+
+	if ( wp_doing_ajax() && isset( $_REQUEST['action'], $_REQUEST['editor_post_id'] )
+		&& 'elementor_ajax' === sanitize_key( wp_unslash( $_REQUEST['action'] ) ) ) {
+		return absint( $_REQUEST['editor_post_id'] );
+	}
+
+	return 0;
+
+}
+
+/**
+ * Polylang language slug for the document open in the Elementor editor.
+ *
+ * @since 2.5.6
+ *
+ * @return string Language slug, or empty string if unknown.
+ */
+function cpel_get_elementor_editor_language() {
+
+	$post_id = cpel_get_elementor_editor_post_id();
+
+	return $post_id ? (string) pll_get_post_language( $post_id ) : '';
+
+}
+
+/**
  * Is post a translation in secondary language
  *
  * @since  2.0.0
