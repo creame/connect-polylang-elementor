@@ -451,7 +451,7 @@ class ConnectPlugins {
 
 		if ( $sub_id && cpel_is_translation( $this->template_id ) ) {
 
-			if ( in_array( $parsed_condition['sub_name'], get_post_types(), true ) ) {
+			if ( get_post_type( $sub_id ) ) {
 
 				$sub_id = pll_get_post( $sub_id ) ?: $sub_id; //phpcs:ignore WordPress.PHP.DisallowShortTernary
 
