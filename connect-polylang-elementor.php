@@ -20,8 +20,8 @@
  * Requires WP:       5.4
  * Requires PHP:      5.6
  * Requires Plugins:  polylang, elementor
- * Elementor tested up to: 3.34.1
- * Elementor Pro tested up to: 3.34.1
+ * Elementor tested up to:4.1.1
+ * Elementor Pro tested up to: 4.1.1
  *
  * Copyright (c) 2021 Paco Toledo - CREAME
  * Copyright (c) 2018-2021 David Decker - DECKERWEB

@@ -208,14 +208,14 @@ Please report security bugs found in the source code of the undefined plugin thr
 
 == Changelog ==
 
-= Version 2.6.0 | 2026-01-19 =
-
+= Version 2.6.0 | 2026-06-03 =
+* **Fix**: Elementor Editor Search Ignoring active language detected by @aidezmoi [The search function in Elementor editor isn’t working for translations](https://wordpress.org/support/topic/the-search-function-in-elementor-editor-isnt-working-for-translations/#post-18918086)
 * **Added:** New dashboard section with a **Getting Started** page to help users set up the plugin quickly.
 * **Added:** **Floating language switcher designer** to customize the language switcher visually, without coding.
 * **Added:** AutoPoly promotional admin notice.
 * **Improved:** Overall onboarding experience for first-time users.
 * **Improved:** Language switcher design and placement for better usability.
-* **Compatibility:** Elementor v3.34.1 and Polylang v3.7.6.
+* **Compatibility:** Elementor v4.1.1 and Polylang v3.8.4.
 * **Improved:** Minor code Improvements.
 
 = 2.5.5 =

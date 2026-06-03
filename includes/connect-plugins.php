@@ -58,6 +58,9 @@ class ConnectPlugins {
 			// All langs for template conditions & global widgets.
 			add_action( 'parse_query', array( $this, 'query_all_languages' ), 1 );
 
+			// Elementor editor term search (categories, tags, etc.).
+			add_filter( 'get_terms_args', array( $this, 'elementor_editor_terms_lang' ), 20, 2 );
+
 			// Empty template conditions on translations.
 			add_filter( 'get_post_metadata', array( $this, 'elementor_conditions_empty_on_translations' ), 10, 3 );
 			add_filter( 'pre_update_option_elementor_pro_theme_builder_conditions', array( $this, 'theme_builder_conditions_remove_empty' ) );
@@ -139,7 +142,10 @@ class ConnectPlugins {
 	}
 
 	/**
-	 * Query all languages if conditions meets
+	 * Adjust Polylang language filtering for Elementor admin queries.
+	 *
+	 * - Theme Builder conditions & global widgets: all languages.
+	 * - Elementor editor searches (posts, templates, loop items): edited document language.
 	 *
 	 *   Note: Needs to be priority 1, since Polylang uses the action parse_query
 	 *         which is fired before 'pre_get_posts'.
@@ -169,7 +175,86 @@ class ConnectPlugins {
 
 		if ( $is_elementor_conditions || $is_global_widget ) {
 			$query->set( 'lang', '' );
+			return;
 		}
+
+		$lang = cpel_get_elementor_editor_language();
+
+		if ( ! $lang || ! $this->should_filter_elementor_editor_post_query( $query ) ) {
+			return;
+		}
+
+		$query->set( 'lang', $lang );
+
+	}
+
+	/**
+	 * Whether a WP_Query in the Elementor editor should use the edited document's language.
+	 *
+	 * @since 2.5.6
+	 *
+	 * @param \WP_Query $query Current query.
+	 * @return bool
+	 */
+	private function should_filter_elementor_editor_post_query( $query ) {
+
+		// Do not restrict when loading already-selected post IDs.
+		if ( ! empty( $query->query_vars['post__in'] ) ) {
+			return false;
+		}
+
+		$post_type = $query->get( 'post_type' );
+
+		if ( empty( $post_type ) ) {
+			return false;
+		}
+
+		foreach ( (array) $post_type as $type ) {
+			if ( 'any' === $type || pll_is_translated_post_type( $type ) ) {
+				return true;
+			}
+		}
+
+		return false;
+
+	}
+
+	/**
+	 * Filter taxonomy term searches in the Elementor editor by the edited document's language.
+	 *
+	 * @since 2.5.6
+	 *
+	 * @param array        $args       WP_Term_Query arguments.
+	 * @param string|array $taxonomies Queried taxonomies.
+	 * @return array
+	 */
+	public function elementor_editor_terms_lang( $args, $taxonomies ) {
+
+		if ( ! empty( $args['object_ids'] ) ) {
+			return $args;
+		}
+
+		// Do not restrict when loading already-selected term IDs.
+		if ( empty( $args['search'] ) && empty( $args['name__like'] ) ) {
+			if ( ! empty( $args['include'] ) || ! empty( $args['exclude'] ) || ! empty( $args['term_taxonomy_id'] ) ) {
+				return $args;
+			}
+		}
+
+		$lang = cpel_get_elementor_editor_language();
+
+		if ( ! $lang ) {
+			return $args;
+		}
+
+		foreach ( (array) $taxonomies as $taxonomy ) {
+			if ( pll_is_translated_taxonomy( $taxonomy ) ) {
+				$args['lang'] = $lang;
+				break;
+			}
+		}
+
+		return $args;
 
 	}
 
@@ -366,7 +451,7 @@ class ConnectPlugins {
 
 		if ( $sub_id && cpel_is_translation( $this->template_id ) ) {
 
-			if ( in_array( $parsed_condition['sub_name'], get_post_types(), true ) ) {
+			if ( get_post_type( $sub_id ) ) {
 
 				$sub_id = pll_get_post( $sub_id ) ?: $sub_id; //phpcs:ignore WordPress.PHP.DisallowShortTernary
 
